@@ -3,6 +3,7 @@
 
 This section summarizes the changes in the following releases:
 
+* <<logstash-6-8-7,Logstash 6.8.7>>
 * <<logstash-6-8-6,Logstash 6.8.6>>
 * <<logstash-6-8-5,Logstash 6.8.5>>
 * <<logstash-6-8-4,Logstash 6.8.4>>
@@ -37,6 +38,72 @@ This section summarizes the changes in the following releases:
 * <<logstash-6-1-2,Logstash 6.1.2>>
 * <<logstash-6-1-1,Logstash 6.1.1>>
 * <<logstash-6-1-0,Logstash 6.1.0>>
+
+[[logstash-6-8-7]]
+=== Logstash 6.8.7 Release Notes
+
+---------- DELETE FROM HERE ------------
+=== Logstash Pull Requests with label v6.8.7
+
+* Update licenses for dependencies https://github.com/elastic/logstash/pull/11101[#11101]
+* update licenses for dependencies in 6.8 https://github.com/elastic/logstash/pull/11562[#11562]
+
+=== Logstash Commits between 6.8 and 6.8.6
+
+Computed with "git log --pretty=format:'%h -%d %s (%cr) <%an>' --abbrev-commit --date=relative v6.8.6..6.8"
+
+9be8886d3 - (HEAD -> 6.8, origin/6.8) Update patch plugin versions in gemfile lock for 6.8.7 (#11626) (16 hours ago) <Logstash Machine>
+acc5f1120 - update jruby-openssl license notice (#11617) (5 days ago) <Ry Biesemeyer>
+7c82c33b7 - update licenses for dependencies (#11562) (4 weeks ago) <João Duarte>
+8376e700e - fail license report job on missing licenses (4 weeks ago) <Joao Duarte>
+2a70ad93d - Update JrJackson and jackson deps (7 weeks ago) <Rob Bavey>
+ca125c172 - Add java plugin examples to skiplist for 6.8 (#11473) (7 weeks ago) <Karen Metts>
+c42febdab - backport SharedHelpers.trap memleak fix to 6.8 (#11468) (8 weeks ago) <João Duarte>
+5f9d3b4ab - bump version to 6.8.7 (#11452) (2 months ago) <Ry Biesemeyer>
+99ee973bb - [Doc] Release Notes 6.8.6 (#11446) (2 months ago) <Karen Metts>
+
+=== Logstash Plugin Release Changelogs ===
+Computed from "git diff v6.8.6..6.8 *.release"
+Changed plugin versions:
+logstash-filter-split: 3.1.7 -> 3.1.8
+logstash-input-file: 4.1.11 -> 4.1.16
+logstash-input-http: 3.3.2 -> 3.3.3
+logstash-output-csv: 3.0.7 -> 3.0.8
+logstash-output-pagerduty: 3.0.8 -> 3.0.9
+---------- DELETE UP TO HERE ------------
+
+==== Plugins
+
+*Split Filter*
+
+*File Input*
+
+* Added configuration setting exit_after_read to read to EOF and terminate
+  the input [#240](https://github.com/logstash-plugins/logstash-input-file/pull/240)
+
+* Fixed bug in conversion of sincedb_clean_after setting [#257](https://github.com/logstash-plugins/logstash-input-file/pull/257)
+
+* Fixed bug in delete of multiple watched files [#254](https://github.com/logstash-plugins/logstash-input-file/pull/254)
+
+* Fixed sinceDB to work spaces filename [#249](https://github.com/logstash-plugins/logstash-input-file/pull/249)
+
+* Fix regression in `exclude` handling. Patterns are matched against the filename, not full path.
+    [Issue #237](https://github.com/logstash-plugins/logstash-input-file/issues/237)
+
+*Http Input*
+
+* Revert updates to netty and tcnative since CBC ciphers are still used in many contexts
+* More about the reasoning can be found [here](https://github.com/elastic/logstash/issues/11499#issuecomment-580333510)
+
+*Csv Output*
+
+* Docs: Correct typos [#19](https://github.com/logstash-plugins/logstash-output-csv/pull/19) 
+* Docs: Fix formatting after code sample [#22](https://github.com/logstash-plugins/logstash-output-csv/pull/22)
+
+*Pagerduty Output*
+
+* Changed `service_key` to allow dynamic values [#16](https://github.com/logstash-plugins/logstash-output-pagerduty/pull/16)
+
 
 [[logstash-6-8-6]]
 === Logstash 6.8.6 Release Notes

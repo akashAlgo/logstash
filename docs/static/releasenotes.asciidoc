@@ -29,80 +29,47 @@ This section summarizes the changes in the following releases:
 [[logstash-7-6-1]]
 === Logstash 7.6.1 Release Notes
 
----------- DELETE FROM HERE ------------
-=== Logstash Pull Requests with label v7.6.1
-
-=== Logstash Commits between 7.6 and 7.6.0
-
-Computed with "git log --pretty=format:'%h -%d %s (%cr) <%an>' --abbrev-commit --date=relative v7.6.0..7.6"
-
-1bf5c55b9 - (HEAD -> 7.6, origin/7.6) Update patch plugin versions in gemfile lock for 7.6.1 (#11627) (16 hours ago) <Logstash Machine>
-5ff66f1d4 - Remove deprecation notice (#11625) (17 hours ago) <Karen Metts>
-15fe79f3d - update jruby-openssl license notice (#11618) (5 days ago) <Ry Biesemeyer>
-3e380c3dc - Update contributing guidelines to clarify changelog formatting (6 days ago) <Karen Metts>
-d57280ccc - Rework ls netflow module deprecation notice (7 days ago) <Karen Metts>
-64e5e8185 - [DOC]Clarify internal collectors deprecation status for 7.6 (#11607) (8 days ago) <Karen Metts>
-a79e2dfea - Fix setting name for monitoring (2 weeks ago) <Karen Metts>
-d5fc79814 - Version bump to 7.6.1 (#11594) (2 weeks ago) <Rob Bavey>
-a30cdfeba - Release notes for 7.6.0 (2 weeks ago) <Rob Bavey>
-0bf1133dd - Clarify wording and add to another page (3 weeks ago) <Karen Metts>
-0c14e0a7e - Add Apple notarization info (3 weeks ago) <Karen Metts>
-
-=== Logstash Plugin Release Changelogs ===
-Computed from "git diff v7.6.0..7.6 *.release"
-Changed plugin versions:
-logstash-filter-dns: 3.1.3 -> 3.1.4
-logstash-filter-memcached: 1.0.1 -> 1.0.2
-logstash-filter-split: 3.1.7 -> 3.1.8
-logstash-input-beats: 6.0.4 -> 6.0.8
-logstash-input-file: 4.1.12 -> 4.1.16
-logstash-integration-jdbc: 5.0.0 -> 5.0.1
-logstash-output-elasticsearch: 10.3.0 -> 10.3.1
----------- DELETE UP TO HERE ------------
+* [DOC] Rework ls netflow module deprecation notice https://github.com/elastic/logstash/pull/11600[#11600]
+* [DOC] Clarify internal collectors deprecation status for 7.6 https://github.com/elastic/logstash/pull/11607[#11607]
+* [DOC] Fix setting name for monitoring https://github.com/elastic/logstash/pull/11597[#11597]
+* [DOC] Add Apple notarization info https://github.com/elastic/logstash/pull/11588[#11588]
 
 ==== Plugins
 
 *Dns Filter*
 
-* Replaced Timeout::timeout block with `Resolv::DNS::timeouts=` [#62](https://github.com/logstash-plugins/logstash-filter-dns/pull/62)
-* Added restriction for ruby version > 2.0, effectively making Logstash 6.x+ a requirement [#62](https://github.com/logstash-plugins/logstash-filter-dns/pull/62)
+* Replaced Timeout::timeout block with `Resolv::DNS::timeouts=` https://github.com/logstash-plugins/logstash-filter-dns/pull/62[#62]
+* Added restriction for ruby version > 2.0, effectively making Logstash 6.x+ a requirement https://github.com/logstash-plugins/logstash-filter-dns/pull/62[#62]
 
 *Memcached Filter*
 
-* Fixed issue with ttl not being set [#13](https://github.com/logstash-plugins/logstash-filter-memcached/pull/13)
+* Fixed issue with ttl not being set https://github.com/logstash-plugins/logstash-filter-memcached/pull/13[#13]
 
 *Split Filter*
 
+* Fixed issue where @target optimization would stop event.remove(@field) from being called, which can be expensive with large split fields. https://github.com/logstash-plugins/logstash-filter-split/pull/40[#40]
+
 *Beats Input*
 
-* Fixed issue where an SslContext was unnecessarily being created for each connection [#383](https://github.com/logstash-plugins/logstash-input-beats/pull/383)
-* Fixed issue where `end` was not being called when an Inflater was closed [#383](https://github.com/logstash-plugins/logstash-input-beats/pull/383)
-
-* Reverted changes to netty and tcnative dependencies and removal of CBC ciphers to preserve compatibility with Lumberjack output [#381](https://github.com/logstash-plugins/logstash-input-beats/pull/381)
-
-* Downgraded netty to 4.1.34 due to an issue in IdleStateHandler [#380](https://github.com/logstash-plugins/logstash-input-beats/pull/380)
-
-* Security: update netty deps - avoid CBC ciphers [#376](https://github.com/logstash-plugins/logstash-input-beats/pull/376)
+* Fixed issue where an SslContext was unnecessarily being created for each connection https://github.com/logstash-plugins/logstash-input-beats/pull/383[#383]
+* Fixed issue where `end` was not being called when an Inflater was closed https://github.com/logstash-plugins/logstash-input-beats/pull/383[#383]
+* Downgraded netty to 4.1.34 due to an issue in IdleStateHandler https://github.com/logstash-plugins/logstash-input-beats/pull/380[#380]
 
 *File Input*
 
-* Added configuration setting exit_after_read to read to EOF and terminate
-  the input [#240](https://github.com/logstash-plugins/logstash-input-file/pull/240)
-
-* Fixed bug in conversion of sincedb_clean_after setting [#257](https://github.com/logstash-plugins/logstash-input-file/pull/257)
-
-* Fixed bug in delete of multiple watched files [#254](https://github.com/logstash-plugins/logstash-input-file/pull/254)
-
-* Fixed sinceDB to work spaces filename [#249](https://github.com/logstash-plugins/logstash-input-file/pull/249)
+* Added configuration setting exit_after_read to read to EOF and terminate the input https://github.com/logstash-plugins/logstash-input-file/pull/240[#240]
+* Fixed bug in conversion of sincedb_clean_after setting https://github.com/logstash-plugins/logstash-input-file/pull/257[#257]
+* Fixed bug in delete of multiple watched files https://github.com/logstash-plugins/logstash-input-file/pull/254[#254]
+* Fixed sinceDB to work spaces filename https://github.com/logstash-plugins/logstash-input-file/pull/249[#249]
 
 *Jdbc Integration*
 
-* Fixed tracking_column regression with Postgresql Numeric types [#17](https://github.com/logstash-plugins/logstash-integration-jdbc/pull/17)
-* Fixed driver loading when file not accessible [#15](https://github.com/logstash-plugins/logstash-integration-jdbc/pull/15)
+* Fixed tracking_column regression with Postgresql Numeric types https://github.com/logstash-plugins/logstash-integration-jdbc/pull/17[#17]
+* Fixed driver loading when file not accessible https://github.com/logstash-plugins/logstash-integration-jdbc/pull/15[#15]
 
 *Elasticsearch Output*
 
-* Fix: handle proxy => '' as if none was set [#912](https://github.com/logstash-plugins/logstash-output-elasticsearch/pull/912)
+* Fix: handle proxy => '' as if none was set https://github.com/logstash-plugins/logstash-output-elasticsearch/pull/912[#912]
 
 
 [[logstash-7-6-0]]
